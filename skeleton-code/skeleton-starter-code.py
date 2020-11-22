@@ -34,9 +34,9 @@ ITM = defaultdict(dict)
 
 #ITM[m][u] stores rating score for movie m and user u
 #SIM[m1][m2] stores similarity score between movie m and m1
-users = sys.argv[1]
-movies = sys.argv[2]
-ifile = open("dataset-U"+users+"-I"+movies+".txt")
+numUsers = sys.argv[1]
+numMovies = sys.argv[2]
+ifile = open("dataset-U"+numUsers+"-I"+numMovies+".txt")
 movies = defaultdict(list)
 for l in ifile:
     parts = l.strip().split(",")
@@ -87,3 +87,13 @@ for m in ITM.keys():
 			sum1 += ITM[j][u]*SIM[m][j][0]
 			sum2 += abs(SIM[m][j][0])
 		PRD[m][u] = sum1/sum2
+
+ofile = open("predicted-dataset-U"+numUsers+"-I"+numMovies+".txt", "w")
+
+
+for u in range(0,int(numUsers)):
+	for m in range(0,int(numMovies)):
+		print(m,u,PRD[m][u])
+		ofile.writelines(str(m)+","+str(u)+","+str(PRD[m][u]))
+		ofile.writelines("\n")
+
