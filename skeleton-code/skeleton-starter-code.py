@@ -8,12 +8,20 @@ def neighGen(rating,userRatings,exclude):
 	K = dict()
 	n = len(userRatings)
 	M = 0
-	while (len(list(K.values())) <= 1):
-		M += 1
-		for i in range(0,n):
-			if i != exclude:
-				if (abs(rating - userRatings[i]) <= M):
-					K[i] = userRatings[i]
+	if (n >= 3):
+		while (len(list(K.values())) <= 1):
+			M += 1
+			for i in range(0,n):
+				if i != exclude:
+					if (abs(rating - userRatings[i]) <= M):
+						K[i] = userRatings[i]
+	else:
+		while (len(list(K.values())) <= 0):
+			M += 1
+			for i in range(0,n):
+				if i != exclude:
+					if (abs(rating - userRatings[i]) <= M):
+						K[i] = userRatings[i]	 
 	return K
 
 
@@ -27,7 +35,7 @@ ITM = defaultdict(dict)
 #ITM[m][u] stores rating score for movie m and user u
 #SIM[m1][m2] stores similarity score between movie m and m1
 
-ifile = open("dataset-U10-I3.txt")
+ifile = open("dataset-U10-I2.txt")
 movies = defaultdict(list)
 for l in ifile:
     parts = l.strip().split(",")
