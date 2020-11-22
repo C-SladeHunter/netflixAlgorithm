@@ -2,7 +2,7 @@ from collections import defaultdict
 from scipy.stats import pearsonr
 import numpy as np
 import math
-
+import sys
 
 def neighGen(rating,userRatings,exclude):
 	K = dict()
@@ -34,8 +34,9 @@ ITM = defaultdict(dict)
 
 #ITM[m][u] stores rating score for movie m and user u
 #SIM[m1][m2] stores similarity score between movie m and m1
-
-ifile = open("dataset-U10-I2.txt")
+users = sys.argv[1]
+movies = sys.argv[2]
+ifile = open("dataset-U"+users+"-I"+movies+".txt")
 movies = defaultdict(list)
 for l in ifile:
     parts = l.strip().split(",")
